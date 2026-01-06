@@ -61,9 +61,19 @@ const MOCK_POSTS = [
 			"Our blog is open source! Just fork the repo and add a markdown file...",
 	},
 ];
+
+import { getCollection } from "astro:content";
+
+// Fetch the real markdown posts
+const posts = await getCollection("blog");
+
+// Sort them by date (newest first)
+const sortedPosts = posts.sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 ---
 
-<BaseLayout title="IRIS — Home">
+<BaseLayout title="Flare Africa — Home">
 	<div class="animate-in fade-in duration-700">
 		<section class="hero">
 			<div class="bg-glows" aria-hidden="true">
@@ -124,26 +134,26 @@ const MOCK_POSTS = [
 						View all posts <span class="arrow">→</span>
 					</a>
 				</div>
-
 				<div class="post-grid">
 					{
-						MOCK_POSTS.map((post) => (
+						sortedPosts.map((post) => (
+							/* We use post.slug for the link and post.data for the content */
 							<a href={`/blog/${post.slug}`} class="post-card group">
 								<div class="card-image-box">
 									<div class="zap-icon" aria-hidden="true">
 										⚡
 									</div>
-									<h4 class="image-title">{post.title}</h4>
+									<h4 class="image-title">{post.data.title}</h4>
 								</div>
 
 								<div class="card-content">
-									<div class="post-date">{post.date}</div>
-									<h3 class="post-title">{post.title}</h3>
-									<p class="post-description">{post.description}</p>
+									<div class="post-date">{post.data.date}</div>
+									<h3 class="post-title">{post.data.title}</h3>
+									<p class="post-description">{post.data.description}</p>
 
 									<div class="author-info">
-										<span class="avatar">{post.author[0]}</span>
-										By {post.author}
+										<span class="avatar">{post.data.author[0]}</span>
+										By {post.data.author}
 									</div>
 								</div>
 							</a>

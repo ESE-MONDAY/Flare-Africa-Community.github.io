@@ -1,0 +1,239 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layout/BaseLayout.astro";
+
+// 1. Generate paths for all posts
+export async function getStaticPaths() {
+	const blogEntries = await getCollection("blog");
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+// 2. Extract entry and render content
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={entry.data.title}>
+	<article class="blog-post">
+		<div class="container">
+			<a href="/blog" class="back-link">
+				<span class="arrow">←</span> Back to blog
+			</a>
+
+			<header class="post-header">
+				<div class="category-tag">Case Study • {entry.data.date}</div>
+				<h1 class="post-title">{entry.data.title}</h1>
+
+				<div class="author-card">
+					<div class="author-avatar">
+						{entry.data.author[0]}
+					</div>
+					<div class="author-info">
+						<div class="author-name">{entry.data.author}</div>
+						<div class="author-role">Technical Contributor</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="post-content">
+				<p class="description-quote">"{entry.data.description}"</p>
+
+				<div class="summary-box">
+					<h3 class="summary-title">Summary</h3>
+					<p>
+						{entry.data.summary}
+					</p>
+				</div>
+
+				<div class="markdown-body">
+					<Content />
+				</div>
+			</div>
+
+			<footer class="contribute-cta">
+				<h3 class="cta-title">Want to contribute content like this?</h3>
+				<p class="cta-text">
+					Join our community on GitHub and submit your first Markdown post
+					today.
+				</p>
+				<a href="/community" class="cta-button"> Learn How to Contribute </a>
+			</footer>
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	.blog-post {
+		padding-top: 8rem; /* pt-32 */
+		padding-bottom: 6rem; /* pb-24 */
+		animation: fadeInUp 0.5s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(1rem);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.container {
+		max-width: 48rem; /* max-w-3xl */
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	/* Back Link */
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		color: #6b7280;
+		text-decoration: none;
+		margin-bottom: 3rem;
+		font-size: 0.875rem;
+		transition: color 0.3s;
+	}
+
+	.back-link:hover {
+		color: white;
+	}
+	.back-link .arrow {
+		margin-right: 0.5rem;
+	}
+
+	/* Header */
+	.category-tag {
+		color: #ff6a00;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: -0.025em;
+		font-size: 0.875rem;
+		margin-bottom: 1rem;
+	}
+
+	.post-title {
+		font-size: 2.5rem;
+		font-weight: 900;
+		color: white;
+		line-height: 1.1;
+		margin-bottom: 1.5rem;
+	}
+
+	@media (min-width: 1024px) {
+		.post-title {
+			font-size: 3.75rem;
+		}
+	}
+
+	/* Author Section */
+	.author-card {
+		display: flex;
+		align-items: center;
+		padding: 1.5rem 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		margin-bottom: 3rem;
+	}
+
+	.author-avatar {
+		width: 2.5rem;
+		height: 2.5rem;
+		background-color: #ff6a00;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 700;
+		color: white;
+		margin-right: 1rem;
+	}
+
+	.author-name {
+		font-weight: 700;
+		color: white;
+		margin-right: 1rem;
+	}
+	.author-role {
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+
+	/* Body Content */
+	.post-content {
+		color: #d1d5db;
+		line-height: 1.8;
+	}
+
+	.description-quote {
+		font-size: 1.25rem;
+		color: #9ca3af;
+		font-style: italic;
+		margin-bottom: 2rem;
+	}
+
+	.summary-box {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 2rem;
+		border-radius: 1rem;
+		border-left: 4px solid #ff6a00;
+		margin-bottom: 3rem;
+	}
+
+	.summary-title {
+		color: white;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	/* Targets the Markdown output specifically */
+	.markdown-body :global(p) {
+		margin-bottom: 1.5rem;
+	}
+	.markdown-body :global(h2) {
+		color: white;
+		font-size: 1.75rem;
+		margin: 2.5rem 0 1rem;
+	}
+
+	/* CTA Banner */
+	.contribute-cta {
+		margin-top: 5rem;
+		padding: 3rem;
+		background: linear-gradient(to bottom right, #111, #000);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 2rem;
+		text-align: center;
+	}
+
+	.cta-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: white;
+		margin-bottom: 1rem;
+	}
+	.cta-text {
+		color: #6b7280;
+		margin-bottom: 2rem;
+	}
+
+	.cta-button {
+		display: inline-block;
+		padding: 0.75rem 2rem;
+		background-color: #ff6a00;
+		color: white;
+		font-weight: 700;
+		text-decoration: none;
+		border-radius: 9999px;
+		transition: background-color 0.3s;
+	}
+
+	.cta-button:hover {
+		background-color: #e65f00;
+	}
+</style>
