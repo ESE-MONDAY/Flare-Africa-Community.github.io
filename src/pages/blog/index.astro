@@ -1,7 +1,131 @@
 ---
 import BaseLayout from "../../layout/BaseLayout.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+
+const sortedPosts = posts.sort(
+	(a: any, b: any) =>
+		new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 ---
 
-<BaseLayout title="IRIS — Blog">
-	<h1 class="text-3xl font-bold mb-6">Blog</h1>
+<BaseLayout title="Flare Africa — Blog">
+	<section class="chronicles-view">
+		<header class="header">
+			<h1 class="title">The <span class="highlight">Chronicles</span></h1>
+			<p class="subtitle">
+				Community updates, technical tutorials, and ecosystem insights.
+			</p>
+		</header>
+
+		<div class="post-list">
+			{
+				sortedPosts.map((post) => (
+					<a href={`/blog/${post.slug}`} class="post-item group">
+						<div class="thumbnail">
+							<div class="gradient-overlay">
+								<span class="icon">📖</span>
+							</div>
+						</div>
+
+						<div class="post-content">
+							<div class="post-meta">
+								{post.data.date} <span class="separator">•</span>{" "}
+								{post.data.author}
+							</div>
+							<h2 class="post-title">{post.data.title}</h2>
+							<p class="post-description">{post.data.description}</p>
+							<div class="read-more">
+								Read Article <span class="arrow">→</span>
+							</div>
+						</div>
+					</a>
+				))
+			}
+		</div>
+	</section>
 </BaseLayout>
+<style>
+	/* Use the pure CSS we wrote earlier here */
+	.chronicles-view {
+		max-width: 56rem;
+		margin: 0 auto;
+		padding: 6rem 2rem;
+	}
+
+	.header {
+		margin-bottom: 4rem;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.title {
+		font-size: 3.5rem;
+		font-weight: 900;
+		color: white;
+	}
+	.highlight {
+		color: #ff6a00;
+	}
+	.subtitle {
+		color: #6b7280;
+		font-size: 1.25rem;
+	}
+
+	.post-list {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.post-item {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		text-decoration: none;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		padding-bottom: 3rem;
+	}
+
+	@media (min-width: 768px) {
+		.post-item {
+			flex-direction: row;
+		}
+	}
+
+	.thumbnail {
+		width: 100%;
+		height: 10rem;
+		background: #1a1a1a;
+		border-radius: 1rem;
+		flex-shrink: 0;
+	}
+
+	@media (min-width: 768px) {
+		.thumbnail {
+			width: 16rem;
+		}
+	}
+
+	.post-title {
+		font-size: 1.5rem;
+		color: white;
+		transition: color 0.3s;
+	}
+	.post-item:hover .post-title {
+		color: #ff6a00;
+	}
+
+	.post-description {
+		color: #6b7280;
+		line-height: 1.6;
+	}
+	.post-meta {
+		color: #ff6a00;
+		font-weight: 700;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+	}
+</style>
