@@ -1,5 +1,6 @@
 ---
 const currentPath = new URL(Astro.url).pathname;
+import HeadLink from "./HeadLink.astro";
 
 const menuItems = [
 	{ href: "/", label: "Home" },
@@ -18,11 +19,11 @@ const menuItems = [
 		<div class="nav-menu">
 			{
 				menuItems.map((item) => (
-					<a
+					<HeadLink
 						href={item.href}
 						class={`nav-link ${currentPath === item.href ? "active" : ""}`}>
 						{item.label}
-					</a>
+					</HeadLink>
 				))
 			}
 		</div>
