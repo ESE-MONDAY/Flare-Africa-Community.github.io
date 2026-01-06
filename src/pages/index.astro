@@ -1,16 +1,156 @@
 ---
-
+import BaseLayout from "../layout/BaseLayout.astro";
+// Features Data
+const features = [
+	{
+		title: "Community Focused",
+		description:
+			"Connecting developers, artists, and researchers from across the continent to share knowledge and build together.",
+		icon: "👥",
+	},
+	{
+		title: "Blog-First Learning",
+		description:
+			"Comprehensive resources, tutorials, and case studies written by the community, for the community.",
+		icon: "📖",
+	},
+	{
+		title: "Open Contributions",
+		description:
+			"Our content is open source. Contribute via Markdown on GitHub and earn recognition in the ecosystem.",
+		icon: "💻",
+	},
+];
+const MOCK_POSTS = [
+	{
+		slug: "connecting-africa-to-flare",
+		title: "Connecting Africa to Flare Network",
+		description:
+			"A deep dive into why decentralized data is the future of African fintech.",
+		date: "2024-04-12",
+		author: "Kwame Mensah",
+		content: `
+      # The Vision
+      Flare Africa aims to bridge the gap between continental builders and the Flare Network.
+      
+      ## Why Data Matters
+      By utilizing the FTSO, builders can create trustless applications that respond to real-world price feeds without centralized oracles.
+      
+      ## Community First
+      Our mission is to empower 10,000 developers across the continent with the tools to build secure, data-driven dApps.
+    `,
+	},
+	{
+		slug: "building-on-songbird",
+		title: "Building Your First App on Songbird",
+		description:
+			"Learn how to deploy your first smart contract on Flare’s canary network.",
+		date: "2024-03-28",
+		author: "Amara Okafor",
+		content:
+			"Learn how to deploy your first smart contract on Flare’s canary network...",
+	},
+	{
+		slug: "contributing-to-open-source",
+		title: "Open Source Contribution Guide",
+		description:
+			"How to contribute to Flare Africa projects using our Markdown system.",
+		date: "2024-03-15",
+		author: "Dev Team",
+		content:
+			"Our blog is open source! Just fork the repo and add a markdown file...",
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="IRIS — Home">
+	<div class="animate-in fade-in duration-700">
+		<section class="hero">
+			<div class="bg-glows" aria-hidden="true">
+				<div class="glow glow-top"></div>
+				<div class="glow glow-bottom"></div>
+			</div>
+
+			<div class="container">
+				<div class="badge">
+					<span class="zap">⚡</span> BUILT ON FLARE NETWORK
+				</div>
+
+				<h1 class="title">
+					Connect. Learn. <br />
+					<span class="gradient-text">Build. Contribute.</span>
+				</h1>
+
+				<p class="description">
+					The decentralized home for the next generation of African builders
+					harnessing the power of the Flare Network.
+				</p>
+
+				<div class="button-group">
+					<a href="/community" class="btn btn-primary">
+						Join the Community <span class="arrow">→</span>
+					</a>
+					<a href="/blog" class="btn btn-secondary"> Read the Blog </a>
+				</div>
+			</div>
+		</section>
+		<section class="features-section">
+			<div class="container">
+				<div class="grid">
+					{
+						features.map((feature) => (
+							<div class="card group">
+								<div class="icon-wrapper">
+									<span class="icon">{feature.icon}</span>
+								</div>
+								<h3 class="card-title">{feature.title}</h3>
+								<p class="card-text">{feature.description}</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+		<section class="insights">
+			<div class="container">
+				<div class="header">
+					<div>
+						<h2 class="section-title">Latest Insights</h2>
+						<p class="section-subtitle">
+							Discover the latest developments in the African Flare ecosystem.
+						</p>
+					</div>
+					<a href="/blog" class="view-all">
+						View all posts <span class="arrow">→</span>
+					</a>
+				</div>
+
+				<div class="post-grid">
+					{
+						MOCK_POSTS.map((post) => (
+							<a href={`/blog/${post.slug}`} class="post-card group">
+								<div class="card-image-box">
+									<div class="zap-icon" aria-hidden="true">
+										⚡
+									</div>
+									<h4 class="image-title">{post.title}</h4>
+								</div>
+
+								<div class="card-content">
+									<div class="post-date">{post.date}</div>
+									<h3 class="post-title">{post.title}</h3>
+									<p class="post-description">{post.description}</p>
+
+									<div class="author-info">
+										<span class="avatar">{post.author[0]}</span>
+										By {post.author}
+									</div>
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

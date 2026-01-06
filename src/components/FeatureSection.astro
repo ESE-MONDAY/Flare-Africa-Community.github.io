@@ -1,0 +1,121 @@
+---
+// Features Data
+const features = [
+	{
+		title: "Community Focused",
+		description:
+			"Connecting developers, artists, and researchers from across the continent to share knowledge and build together.",
+		icon: "👥",
+	},
+	{
+		title: "Blog-First Learning",
+		description:
+			"Comprehensive resources, tutorials, and case studies written by the community, for the community.",
+		icon: "📖",
+	},
+	{
+		title: "Open Contributions",
+		description:
+			"Our content is open source. Contribute via Markdown on GitHub and earn recognition in the ecosystem.",
+		icon: "💻",
+	},
+];
+---
+
+<section class="features-section">
+	<div class="container">
+		<div class="grid">
+			{
+				features.map((feature) => (
+					<div class="card group">
+						<div class="icon-wrapper">
+							<span class="icon">{feature.icon}</span>
+						</div>
+						<h3 class="card-title">{feature.title}</h3>
+						<p class="card-text">{feature.description}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.features-section {
+		padding: 6rem 0; /* py-24 */
+		background-color: #0d0d0d;
+	}
+
+	.container {
+		max-width: 80rem; /* max-w-7xl */
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	/* Grid Layout */
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 */
+		}
+	}
+
+	/* Feature Card */
+	.card {
+		padding: 2rem;
+		background-color: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 1.5rem; /* rounded-3xl */
+		transition: all 0.3s ease;
+	}
+
+	.card:hover {
+		border-color: rgba(255, 106, 0, 0.3);
+	}
+
+	/* Icon Styling */
+	.icon-wrapper {
+		width: 3rem;
+		height: 3rem;
+		background-color: rgba(255, 106, 0, 0.1);
+		border-radius: 0.75rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.5rem;
+		transition: background-color 0.3s ease;
+	}
+
+	.icon {
+		font-size: 1.25rem;
+		color: #ff6a00;
+		transition: color 0.3s ease;
+	}
+
+	/* Group Hover Effects */
+	.card:hover .icon-wrapper {
+		background-color: #ff6a00;
+	}
+
+	.card:hover .icon {
+		color: white;
+	}
+
+	/* Text Styling */
+	.card-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: white;
+		margin-bottom: 1rem;
+	}
+
+	.card-text {
+		color: #6b7280; /* text-gray-500 */
+		line-height: 1.625;
+	}
+</style>

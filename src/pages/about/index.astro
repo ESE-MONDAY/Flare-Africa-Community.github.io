@@ -1,0 +1,69 @@
+---
+import Baselayout from "../../layout/BaseLayout.astro";
+import BaseLayout from "../../layout/BaseLayout.astro";
+---
+
+<Baselayout>
+	<section class="mission-header">
+		<div class="container">
+			<h1 class="title">
+				Our <span class="highlight">Mission</span>
+			</h1>
+			<p class="description">
+				Flare Africa was founded to ensure that African developers are not just
+				observers of the decentralized data revolution, but the architects of
+				it. We believe that by providing high-quality educational resources and
+				a supportive community, we can solve local problems with global
+				protocols.
+			</p>
+		</div>
+	</section>
+</Baselayout>
+
+<style>
+	.mission-header {
+		/* pt-48 pb-32 */
+		padding-top: 12rem;
+		padding-bottom: 8rem;
+		text-align: center;
+	}
+
+	.container {
+		max-width: 80rem; /* max-w-7xl equivalent for consistency */
+		margin: 0 auto;
+		padding: 0 1rem; /* px-4 */
+	}
+
+	.title {
+		/* text-6xl font-black */
+		font-size: 3.75rem;
+		font-weight: 900;
+		color: #ffffff;
+		margin-bottom: 2rem; /* mb-8 */
+		line-height: 1;
+	}
+
+	.highlight {
+		color: #ff6a00;
+	}
+
+	.description {
+		/* max-w-2xl mx-auto text-gray-400 text-xl leading-relaxed */
+		max-width: 42rem;
+		margin: 0 auto;
+		color: #9ca3af;
+		font-size: 1.25rem;
+		line-height: 1.625;
+	}
+
+	/* Responsive adjustments for the title */
+	@media (max-width: 640px) {
+		.title {
+			font-size: 3rem;
+		}
+		.mission-header {
+			padding-top: 8rem;
+			padding-bottom: 5rem;
+		}
+	}
+</style>

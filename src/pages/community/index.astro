@@ -1,0 +1,367 @@
+---
+// CommunityView.astro
+
+import BaseLayout from "../../layout/BaseLayout.astro";
+const benefits = [
+	"Access to developer grants and bounties.",
+	"Networking with top Web3 engineers in Africa.",
+	"Exclusive workshops and certification programs.",
+	"Co-working opportunities at regional hubs.",
+];
+
+const steps = [
+	{
+		id: "01",
+		title: "Fork",
+		desc: "Fork our website repository on GitHub to your personal account.",
+	},
+	{
+		id: "02",
+		title: "Add Post",
+		desc: "Add a new .md file in the content/blog directory with your frontmatter.",
+	},
+	{
+		id: "03",
+		title: "Pull Request",
+		desc: "Submit a PR. Our maintainers will review and merge it into the live site.",
+	},
+	{
+		id: "04",
+		title: "Recognition",
+		desc: "Once merged, you're listed as an author on the blog and earned a contributor role.",
+	},
+];
+---
+
+<BaseLayout>
+	<div class="community-view">
+		<div class="container">
+			<header class="text-center">
+				<h1 class="hero-title">
+					Join the <span class="highlight">Pride</span>
+				</h1>
+				<p class="hero-subtitle">
+					Connecting builders across the continent to build the future of
+					decentralized data.
+				</p>
+			</header>
+
+			<div class="main-grid">
+				<section class="card secondary-card">
+					<h2 class="card-heading">🌐 Connect with us</h2>
+					<p class="card-description">
+						Stay updated with our social channels and real-time developer
+						support on Discord.
+					</p>
+					<div class="link-list">
+						<a href="#" class="social-link">
+							<div class="icon-box">𝕏</div>
+							<div class="link-text">Follow us on X (Twitter)</div>
+						</a>
+						<a href="#" class="social-link">
+							<div class="icon-box">GH</div>
+							<div class="link-text">Join the GitHub Org</div>
+						</a>
+					</div>
+				</section>
+
+				<section class="card primary-card">
+					<h2 class="card-heading">⚡ Why Join?</h2>
+					<ul class="benefit-list">
+						{
+							benefits.map((text) => (
+								<li class="benefit-item">
+									<span class="dot" />
+									{text}
+								</li>
+							))
+						}
+					</ul>
+					<button class="cta-button">Join Discord Server</button>
+				</section>
+			</div>
+
+			<section class="contribution-banner">
+				<div class="banner-inner">
+					<h2 class="banner-title">
+						Contribute via <span class="highlight">Markdown</span>
+					</h2>
+					<p class="banner-text">
+						Flare Africa is content-driven. We encourage all members to share
+						their technical insights. Our entire blog system is powered by
+						GitHub.
+					</p>
+
+					<div class="steps-grid">
+						{
+							steps.map((step) => (
+								<div class="step-card">
+									<div class="step-id">
+										{step.id}. {step.title}
+									</div>
+									<p class="step-desc">{step.desc}</p>
+								</div>
+							))
+						}
+					</div>
+
+					<a href="#" class="docs-link">
+						View GitHub Documentation <span class="arrow">→</span>
+					</a>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.community-view {
+		padding-top: 8rem; /* pt-32 */
+		padding-bottom: 6rem; /* pb-24 */
+		animation: fadeIn 0.5s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.container {
+		max-width: 64rem; /* max-w-5xl */
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.text-center {
+		text-align: center;
+		margin-bottom: 5rem;
+	}
+
+	.hero-title {
+		font-size: 3rem; /* text-5xl */
+		font-weight: 900;
+		color: white;
+		margin-bottom: 1.5rem;
+	}
+
+	@media (min-width: 1024px) {
+		.hero-title {
+			font-size: 4.5rem;
+		}
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		color: #9ca3af;
+		max-width: 42rem;
+		margin: 0 auto;
+	}
+
+	.highlight {
+		color: #ff6a00;
+	}
+
+	/* Grid Logic */
+	.main-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		margin-bottom: 5rem;
+	}
+
+	@media (min-width: 768px) {
+		.main-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	/* Card Styles */
+	.card {
+		padding: 2.5rem;
+		border-radius: 1.5rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.secondary-card {
+		background: rgba(255, 255, 255, 0.02);
+	}
+
+	.primary-card {
+		background: #111;
+		border-color: rgba(255, 106, 0, 0.2);
+		box-shadow: 0 25px 50px -12px rgba(255, 106, 0, 0.05);
+	}
+
+	.card-heading {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: white;
+		margin-bottom: 1.5rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.card-description {
+		color: #6b7280;
+		margin-bottom: 2rem;
+	}
+
+	/* Social Links */
+	.link-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.social-link {
+		display: flex;
+		align-items: center;
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 0.75rem;
+		text-decoration: none;
+		border: 1px solid transparent;
+		transition: all 0.3s ease;
+	}
+
+	.social-link:hover {
+		background: rgba(255, 106, 0, 0.1);
+		border-color: rgba(255, 106, 0, 0.3);
+	}
+
+	.icon-box {
+		width: 2.5rem;
+		height: 2.5rem;
+		background: black;
+		color: #ff6a00;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.5rem;
+		margin-right: 1rem;
+		font-weight: bold;
+	}
+
+	.link-text {
+		color: white;
+		font-weight: 700;
+	}
+
+	/* Benefits List */
+	.benefit-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.benefit-item {
+		display: flex;
+		align-items: flex-start;
+		color: #9ca3af;
+		margin-bottom: 1rem;
+		font-size: 1rem;
+	}
+
+	.dot {
+		width: 0.375rem;
+		height: 0.375rem;
+		background: #ff6a00;
+		border-radius: 50%;
+		margin-top: 0.5rem;
+		margin-right: 0.75rem;
+		flex-shrink: 0;
+	}
+
+	.cta-button {
+		width: 100%;
+		margin-top: 2.5rem;
+		padding: 1rem;
+		background: #ff6a00;
+		color: white;
+		border: none;
+		border-radius: 0.75rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: filter 0.3s;
+	}
+
+	.cta-button:hover {
+		filter: brightness(1.1);
+	}
+
+	/* Contribution Banner */
+	.contribution-banner {
+		background: rgba(255, 255, 255, 0.01);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 2.5rem;
+		padding: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.contribution-banner {
+			padding: 4rem;
+		}
+	}
+
+	.banner-inner {
+		max-width: 48rem;
+	}
+
+	.banner-title {
+		font-size: 1.875rem;
+		font-weight: 900;
+		color: white;
+		margin-bottom: 1.5rem;
+	}
+
+	.banner-text {
+		color: #9ca3af;
+		font-size: 1.125rem;
+		line-height: 1.7;
+		margin-bottom: 2.5rem;
+	}
+
+	.steps-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	@media (min-width: 640px) {
+		.steps-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.step-id {
+		color: #ff6a00;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	.step-desc {
+		font-size: 0.875rem;
+		color: #4b5563;
+	}
+
+	.docs-link {
+		display: inline-flex;
+		align-items: center;
+		color: #ff6a00;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.docs-link:hover {
+		text-decoration: underline;
+	}
+
+	.arrow {
+		margin-left: 0.5rem;
+	}
+</style>
