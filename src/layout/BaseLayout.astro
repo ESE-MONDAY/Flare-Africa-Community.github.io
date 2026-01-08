@@ -11,9 +11,8 @@ const trackingId = import.meta.env.PUBLIC_TRACKING_ID;
 
 <!doctype html>
 <html lang="en">
-	<!-- Google tag (gtag.js) -->
-
-	<>
+	<head>
+		<!-- Google tag (gtag.js) -->
 		<script
 			is:inline
 			async
@@ -27,9 +26,9 @@ const trackingId = import.meta.env.PUBLIC_TRACKING_ID;
 			gtag("js", new Date());
 			gtag("config", trackingId);
 		</script>
-	</>
 
-	<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} />
+	</head>
 
 	<body class="bg-black text-white min-h-screen flex flex-col">
 		<Navbar />
