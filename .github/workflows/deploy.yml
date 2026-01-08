@@ -11,14 +11,31 @@ permissions:
   id-token: write
 
 jobs:
+  # New Job: SEO Audit
+  seo-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install dependencies
+        run: npm install gray-matter # Required to read MDX frontmatter
+      
+      - name: Run SEO Check
+        run: node scripts/seo-check.js
+
   build:
+    needs: seo-audit # Only build if SEO audit passes
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Build with Astro
-        uses: withastro/action@v3  # or v2/v3 depending on your preference 
+        uses: withastro/action@v3
+        with:
+          # Optional: point to your node version if needed
+          node-version: 20
         env:
           PUBLIC_TRACKING_ID: ${{ secrets.PUBLIC_TRACKING_ID }}
 
