@@ -14,7 +14,7 @@ export default defineConfig({
       PUBLIC_TRACKING_ID: envField.string({ context: 'client', access: 'public' }),
     }
   },
-  site: 'https://Flare-Africa-Community.github.io',
+  site: 'https://flareafrica.xyz',
   integrations: [mdx(), sitemap(), partytown({
     config:{
       forward: ['dataLayer.push'],
