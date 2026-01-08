@@ -11,7 +11,7 @@ export default defineConfig({
   },
   env: {
     schema: {
-      PUBLIC_TRACKING_ID: envField.string({ context: 'shared', access: 'public' }),
+      PUBLIC_TRACKING_ID: envField.string({ context: 'server', access: 'public' }),
     }
   },
   site: 'https://flareafrica.xyz',
