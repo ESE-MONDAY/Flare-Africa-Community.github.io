@@ -11,13 +11,13 @@ export default defineConfig({
   },
   env: {
     schema: {
-      PUBLIC_TRACKING_ID: envField.string({ context: 'client', access: 'public' }),
+      PUBLIC_TRACKING_ID: envField.string({ context: 'shared', access: 'public' }),
     }
   },
   site: 'https://flareafrica.xyz',
   integrations: [mdx(), sitemap(), partytown({
     config:{
-      forward: ['dataLayer.push'],
+      forward: ['dataLayer.push', 'gtag'],
     }
   })],
 });
