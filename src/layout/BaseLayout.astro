@@ -11,20 +11,24 @@ const trackingId = import.meta.env.PUBLIC_TRACKING_ID;
 
 <!doctype html>
 <html lang="en">
-	<!-- Google tag (gtag.js) -->
-	{trackingId && (
-			<>
-			<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}></script>
-			<script is:inline define:vars={{ trackingId }}>
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-				gtag('config', trackingId);
-			</script>
-			</>
-		)}
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script
+			is:inline
+			async
+			src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
+		></script>
+		<script is:inline define:vars={{ trackingId }}>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+			gtag("config", trackingId);
+		</script>
 
-	<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} />
+	</head>
 
 	<body class="bg-black text-white min-h-screen flex flex-col">
 		<Navbar />
