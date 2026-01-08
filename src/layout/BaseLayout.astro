@@ -5,13 +5,27 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
+
+const trackingId = import.meta.env.PUBLIC_TRACKING_ID;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
+	<!-- Google tag (gtag.js) -->
+	{trackingId && (
+			<>
+			<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}></script>
+			<script is:inline define:vars={{ trackingId }}>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', trackingId);
+			</script>
+			</>
+		)}
+
+	<BaseHead title={title} description={description} />
+
 	<body class="bg-black text-white min-h-screen flex flex-col">
 		<Navbar />
 		<main class="flex-1 w-full mx-auto px-4 mt-80">
