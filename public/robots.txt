@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Point to your Sitemap Index
+Sitemap: https://flareafrica.xyz/sitemap-index.xml

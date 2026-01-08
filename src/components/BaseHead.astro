@@ -6,19 +6,59 @@ import { SITE_TITLE } from "../const";
 interface Props {
 	title: string;
 	description: string;
-	image?: ImageMetadata;
+	image?: string | ImageMetadata;
+	pubDate?: Date;
+	author?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description } = Astro.props;
+const {
+	title,
+	description,
+	image = "/social-card.png",
+	pubDate,
+	author = "Flare Africa Community",
+} = Astro.props;
 
 // Construct the full image URL for social media bots
+const socialImageURL =
+	typeof image === "string"
+		? new URL(image, Astro.site)
+		: new URL(image.src, Astro.site);
+
+const ldJson = {
+	"@context": "https://schema.org",
+	"@type": pubDate ? "BlogPosting" : "WebPage",
+	headline: title,
+	description: description,
+	image: socialImageURL,
+	author: {
+		"@type": pubDate ? "Person" : "Organization",
+		name: author,
+		url: Astro.site,
+	},
+	datePublished: pubDate
+		? new Date(pubDate).toISOString()
+		: new Date().toISOString(),
+	publisher: {
+		"@type": "Organization",
+		name: "Flare Africa",
+		logo: {
+			"@type": "ImageObject",
+			url: new URL("/favicon.svg", Astro.site),
+		},
+	},
+};
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="robots" content="index, follow" />
+<meta property="og:locale" content="en_US" />
+<meta name="theme-color" content="#000000" />
+<script type="application/ld+json" set:html={JSON.stringify(ldJson)} />
 <link
 	rel="alternate"
 	type="application/rss+xml"
@@ -37,8 +77,10 @@ const { title, description } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageURL} />
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImageURL} />

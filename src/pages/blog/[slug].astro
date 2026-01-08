@@ -16,7 +16,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout title={entry.data.title}>
+<BaseLayout
+	title={entry.data.title}
+	description={entry.data.description}
+	pubDate={entry.data.date}
+	author={`${entry.data.author} | Flare Africa Community`}>
 	<article class="blog-post">
 		<div class="container">
 			<a href="/blog" class="back-link">
