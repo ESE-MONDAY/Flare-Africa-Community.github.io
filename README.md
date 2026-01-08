@@ -3,7 +3,7 @@
 
 Welcome to **Flare Africa**, the decentralized home for the next generation of African builders on the Flare Network. This project is entirely content-driven and open-source. We believe that by documenting our journey, we empower the entire continent to lead the data revolution.
 
----
+
 
 ##  How to Contribute
 
@@ -17,7 +17,7 @@ We use a "Blog-as-Code" approach. Our entire blog system is powered by **Astro C
 4. **Add** your content (see the "Writing the Post" section below).
 5. **Push** and open a **Pull Request (PR)**.
 
----
+
 
 ##  Writing your Post
 
@@ -50,7 +50,7 @@ Write your article body here...
 * **Tone:** Technical but accessible. We are building for everyone from beginners to pros.
 * **Code:** Use triple backticks (```) for code blocks to enable syntax highlighting.
 
----
+
 
 ## 🛠 Local Development
 
@@ -73,7 +73,7 @@ npm run dev
 3. **View the site:**
 Open `http://localhost:4321` in your browser.
 
----
+
 
 ##  Recognition
 
@@ -83,4 +83,4 @@ Once your PR is merged, you will:
 * Be featured across our **X (Twitter)** and **Telegram** channels.
 * Contribute to the collective knowledge of the African Web3 ecosystem.
 
-**Questions?** Join our community on [Telegram] or follow us on [X] and ask the maintainers!
+**Questions?** Join our community on [Telegram](https://t.me/+_y55Rvcl3fY1ODk0) or follow us on [X](https://x.com/FlareAfrica_) and ask the maintainers!
